@@ -1,13 +1,17 @@
 // 引入 mongoose ，连接本地的xiaomai数据库。
 var mongoose = require('mongoose')
 // connect() 返回一个状态待定（pending）的连接
-mongoose.connect('mongodb://localhost/xiaomai',
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false
-  })
-
+mongoose.connect('mongodb://localhost/xiaomai', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false
+})
+mongoose.connection.on('connected', () => {
+  console.log('mongodb数据库连接成功')
+})
+mongoose.connection.on('error', (error) => {
+  console.log('mongodb数据库连接失败', error)
+})
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 

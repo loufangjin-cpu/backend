@@ -45,6 +45,7 @@ const list = async (req, res, next) => {
 const remove = async (req, res, next) => {
   res.set('content-type', 'application/json; charset=utf-8')
   const { id } = req.body
+  console.log('id', id)
   await usersModel.removeUser(id)
   res.render('success', {
     data: JSON.stringify({
